@@ -122,5 +122,46 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
 
 }
 
-const game = GameController();
+//const game = GameController();
 
+
+/*
+
+updateScreen()
+
+Clear the DOM of the current board display by simply setting the .board div's text content to an empty string.
+Get the most up-to-date board from the game controller.
+Get the most up-to-date active player from the game controller.
+Render the player's turn in the .turn div.
+Render each grid square on the DOM
+I make sure to give each cell a data-attribute of column and set that value to the index of the cell in its row, so that when we click them in the future, we already have access to what column that cell is in.
+The cells are buttons, not divs. Why? In most cases, anything clickable should be a button or link. This enables those with accessability issues to still be able to use our site easily be tabbing and selecting with the keyboard.
+The purpose of this method is to refresh our screen whenever a change happens in our game. It will be called whenever the user interacts with the game, like to play a round.
+*/
+
+function ScreenControl () {
+
+    const game = GameController();
+
+    const updateScreen = () => {
+        const btnCells = document.querySelectorAll('.btn-cell');
+        btnCells.forEach((cell)=> cell.textContent = '');
+    }
+    updateScreen();
+}
+
+//const screen = ScreenControl();
+
+
+/*
+clickHandlerBoard()
+The click handler, once it verifies that a valid cell was clicked, will get the column data-attribute value, pass that into our game controller's playRound method, then run updateScreen to refresh the DOM.
+
+*/
+
+/*
+
+First let's create a board on dom. Create buttons, then assign button texts linked to the value of the cells.
+Create a grid with buttons.
+
+*/
