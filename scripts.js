@@ -143,16 +143,29 @@ function ScreenControl () {
 
     const game = GameController();
 
-    const callPlayRound = (r,c) => game.playRound(r,c);
+    const clickHandlerBoard = () => {
+        
+        const buttons = document.querySelectorAll(".btn-cell");
+        buttons.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+            const r = event.target.dataset.row;
+            const c = event.target.dataset.column;
+            game.playRound(r,c);
+            event.target.disabled = true;
+          });
+        })
+        
+    };
 
     const updateScreen = () => {
         const btnCells = document.querySelectorAll('.btn-cell');
         btnCells.forEach((cell)=> cell.textContent = '');
     }
-    return {updateScreen, callPlayRound}
+    return {updateScreen, clickHandlerBoard}
 }
 
-//const screen = ScreenControl();
+const screen = ScreenControl();
+screen.clickHandlerBoard();
 
 
 /*
