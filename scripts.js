@@ -143,11 +143,13 @@ function ScreenControl () {
 
     const game = GameController();
 
+    const callPlayRound = (r,c) => game.playRound(r,c);
+
     const updateScreen = () => {
         const btnCells = document.querySelectorAll('.btn-cell');
         btnCells.forEach((cell)=> cell.textContent = '');
     }
-    updateScreen();
+    return {updateScreen, callPlayRound}
 }
 
 //const screen = ScreenControl();
