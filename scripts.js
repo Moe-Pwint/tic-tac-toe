@@ -142,30 +142,26 @@ The purpose of this method is to refresh our screen whenever a change happens in
 function ScreenControl () {
 
     const game = GameController();
+    const buttons = document.querySelectorAll(".btn-cell");
 
     const clickHandlerBoard = () => {
         
-        const buttons = document.querySelectorAll(".btn-cell");
         buttons.forEach((btn) => {
             btn.addEventListener("click", (event) => {
             const r = event.target.dataset.row;
             const c = event.target.dataset.column;
             game.playRound(r,c);
             event.target.disabled = true;
+            event.target.setAttribute("class",game.getCurrentPlayer().token)
+            event.target.textContent = game.getCurrentPlayer().token;
           });
-        })
-        
+        })       
     };
 
-    const updateScreen = () => {
-        const btnCells = document.querySelectorAll('.btn-cell');
-        btnCells.forEach((cell)=> cell.textContent = '');
-    }
-    return {updateScreen, clickHandlerBoard}
+    clickHandlerBoard();
 }
 
 const screen = ScreenControl();
-screen.clickHandlerBoard();
 
 
 /*
