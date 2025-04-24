@@ -35,7 +35,8 @@ function GameBoard () {
 
     const printBoard = () => {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
-        console.log(boardWithCellValues);
+        //console.log(boardWithCellValues);
+        return boardWithCellValues;
       };
 
       return {getBoard,dropToken,printBoard};
@@ -93,6 +94,8 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
     ]
 
     let currentPlayer = players[0];
+    
+
 
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
@@ -105,14 +108,41 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         console.log(`${getCurrentPlayer().name}'s turn.`);
     };
 
-    const playRound = (r,c) => {
-        console.log(`Dropping ${getCurrentPlayer.name}'s token into row${r} column${c}.`);
-        board.dropToken(r, c, getCurrentPlayer().token);
+    const displayWinner = (playerName) => {
+        const popup = document.querySelector('#popup');
+        popup.parentElement.style.display = "flex";
+        const p = document.createElement('p');
+        p.setAttribute('id','popupMsg');
+        p.textContent = `${playerName} wins!`;
+        popup.appendChild(p);   
+        console.log(`${playerName} wins!`);
 
+    }
+
+    const playRound = (r,c) => {
+        console.log(`Dropping ${getCurrentPlayer().name}'s token into row${r} column${c}.`);
+        board.dropToken(r, c, getCurrentPlayer().token);
+        let winnerFound = false;
+        const checkWinner = () => {
+            const currentBoard = board.printBoard();
+            const player = getCurrentPlayer().token;
+            if (currentBoard[0][0] == player) {
+                if (currentBoard[0][1] == player && currentBoard[0][2] == player) {
+                    setTimeout(() => {displayWinner(getCurrentPlayer().name);},'1000')
+                    winnerFound = true;
+                    return;
+                }
+    
+            }
+             
+        }
+        
+        checkWinner();
         switchPlayer();
         printNewRound();
     };
 
+    
     printNewRound();
 
     return {
@@ -151,6 +181,7 @@ function ScreenControl () {
             const r = event.target.dataset.row;
             const c = event.target.dataset.column;
             game.playRound(r,c);
+
             event.target.disabled = true;
             event.target.setAttribute("class",game.getCurrentPlayer().token)
             event.target.textContent = game.getCurrentPlayer().token;
