@@ -116,40 +116,62 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         p.textContent = `${playerName} wins!`;
         popup.appendChild(p);   
         console.log(`${playerName} wins!`);
-
     }
+
+    const winCombinations = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+    ]
+
+    printNewRound();
 
     const playRound = (r,c) => {
         console.log(`Dropping ${getCurrentPlayer().name}'s token into row${r} column${c}.`);
         board.dropToken(r, c, getCurrentPlayer().token);
         let winnerFound = false;
+
         const checkWinner = () => {
-            const currentBoard = board.printBoard();
+            const currentBoard = board.printBoard().flat();
+            console.log(currentBoard);
             const player = getCurrentPlayer().token;
-            if (currentBoard[0][0] == player) {
-                if (currentBoard[0][1] == player && currentBoard[0][2] == player) {
+            
+            for (let i=0; i<8; i++){
+                let currentCom = [];
+                for (let j of winCombinations[i]) {
+                    currentCom.push(currentBoard[j])
+                }
+                if (currentCom.every((e)=> e == player)) {
                     setTimeout(() => {displayWinner(getCurrentPlayer().name);},'1000')
                     winnerFound = true;
                     return;
-                }
-    
+
+                } winnerFound = false;
             }
-             
+            
+            // if (currentBoard[0][0] == player) {
+            //     if (currentBoard[0][1] == player && currentBoard[0][2] == player) {
+            //         setTimeout(() => {displayWinner(getCurrentPlayer().name);},'1000')
+            //         winnerFound = true;
+            //         return;
+            //     }
+            //     winnerFound = false;
+            // }
         }
-        
+
         checkWinner();
         switchPlayer();
-        printNewRound();
     };
-
-    
-    printNewRound();
 
     return {
         playRound,
         getCurrentPlayer
       };
-
 }
 
 //const game = GameController();
