@@ -132,36 +132,29 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
     printNewRound();
 
     const playRound = (r,c) => {
-        console.log(`Dropping ${getCurrentPlayer().name}'s token into row${r} column${c}.`);
+        const currentP = getCurrentPlayer().name;
+        const currentT = getCurrentPlayer().token;
+        console.log(`Dropping ${currentP}'s token into row${r} column${c}.`);
         board.dropToken(r, c, getCurrentPlayer().token);
         let winnerFound = false;
 
         const checkWinner = () => {
             const currentBoard = board.printBoard().flat();
             console.log(currentBoard);
-            const player = getCurrentPlayer().token;
+            
             
             for (let i=0; i<8; i++){
                 let currentCom = [];
                 for (let j of winCombinations[i]) {
                     currentCom.push(currentBoard[j])
                 }
-                if (currentCom.every((e)=> e == player)) {
-                    setTimeout(() => {displayWinner(getCurrentPlayer().name);},'1000')
+                if (currentCom.every((e)=> e == currentT)) {
+                    setTimeout(() => {displayWinner(currentP);},'1000')
                     winnerFound = true;
                     return;
 
                 } winnerFound = false;
             }
-            
-            // if (currentBoard[0][0] == player) {
-            //     if (currentBoard[0][1] == player && currentBoard[0][2] == player) {
-            //         setTimeout(() => {displayWinner(getCurrentPlayer().name);},'1000')
-            //         winnerFound = true;
-            //         return;
-            //     }
-            //     winnerFound = false;
-            // }
         }
 
         checkWinner();
@@ -202,11 +195,12 @@ function ScreenControl () {
             btn.addEventListener("click", (event) => {
             const r = event.target.dataset.row;
             const c = event.target.dataset.column;
-            game.playRound(r,c);
+            
 
             event.target.disabled = true;
             event.target.setAttribute("class",game.getCurrentPlayer().token)
             event.target.textContent = game.getCurrentPlayer().token;
+            game.playRound(r,c);
           });
         })       
     };
