@@ -1,8 +1,7 @@
-//Disable all buttons when winner found!
+//Stop printNewRound function when the game ends
 //Write logic for game ties
 //Make players able to add names
 //Add play again button
-//Announce each person's turn
 
 
 /*
@@ -90,7 +89,11 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
 
     const printNewRound = () => {
         board.printBoard();
-        console.log(`${getCurrentPlayer().name}'s turn.`);
+        const currentTurn = document.querySelector('#playerTurn');
+        currentTurn.textContent = '';
+        const p = document.createElement('p');
+        p.textContent= `${getCurrentPlayer().name}'s turn.`;
+        currentTurn.appendChild(p);
     };
 
     const displayWinner = (playerName) => {
@@ -114,12 +117,14 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         [2,4,6]
     ]
 
-    printNewRound();
+    
 
+    printNewRound();
     const playRound = (r,c) => {
+        
         const currentP = getCurrentPlayer().name;
         const currentT = getCurrentPlayer().token;
-        console.log(`Dropping ${currentP}'s token into row${r} column${c}.`);
+        // console.log(`Dropping ${currentP}'s token into row${r} column${c}.`);
         board.dropToken(r, c, getCurrentPlayer().token);
         let winnerFound = false;
 
@@ -134,7 +139,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
                     currentCom.push(currentBoard[j])
                 }
                 if (currentCom.every((e)=> e == currentT)) {
-                    setTimeout(() => {displayWinner(currentP);},'1000')
+                    displayWinner(currentP);
                     winnerFound = true;
                     return;
 
@@ -144,6 +149,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
 
         checkWinner();
         switchPlayer();
+        printNewRound();
     };
 
     return {

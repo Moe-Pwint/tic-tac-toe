@@ -5,13 +5,13 @@
 }
 
 @font-face {
-    font-family:'Norse';
-    src:
-		url('fonts/Norse-Bold.woff') format('woff'),
-		url('fonts/Norse-Bold.woff2') format('woff2');
-    font-weight: 700;
+    font-family:'KG';
+	src:url('fonts/KG\ HAPPY.woff2') format('woff2'),
+		url('fonts/KG\ HAPPY.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
-    unicode-range: U+0020-00FE;
+    font-stretch: normal;
+    unicode-range: U+0020-02DC;
 }
 
 @font-face {
@@ -26,15 +26,18 @@
 }
 
 #title{
-    font-family: 'Cicle';
-    font-size: 100px;
+    font-family: 'KG';
+    font-size: 80px;
     margin-bottom:80px;
     align-self: center;
     color: rgb(220, 255, 254);
+    width:max-content;
+    padding-top: 30vh;
 }
 
+
 #playBtn {
-    font-family: 'Norse';
+    font-family: 'Cicle';
     font-size: 45px;
     width:280px;
     height:85px;
@@ -48,25 +51,54 @@
 }
 
 #playBtn:active {
-    box-shadow:         inset 1px 2px 6px #584100;
+    box-shadow: inset 1px 2px 6px #584100;
     transition: 0s ;
 }
 
 .flex {
-    /* margin:auto; */
     display: flex;
     flex-direction: column;
-    padding-top: 30vh;
+    
 }
 
 #playContainer {
-    /* display:flex; */
+    /* display:none;  */
     position:absolute;
     background-color: rgb(88, 94, 206);
     width:100vw;
     height:100vh;
     top:0px;
 }
+
+/*-----------------------------------------*/
+
+
+#game-title{
+    font-family: 'KG';
+    font-size: 30px;
+    margin:30px auto 50px auto;
+    align-content: center;
+    color: rgb(0, 105, 128);
+    width:max-content;
+    
+}
+
+#playerTurn {
+    display:flex;
+    font-family:'Cicle';
+    width: 500px;
+    height:70px;
+    margin:auto;
+    font-size: 35px;
+    
+    border:0.5px ridge rgb(106, 212, 214);
+}
+#playerTurn >p {
+    margin:auto;
+    color:rgb(0, 105, 128);
+    
+}
+
 
 .btn-cell {
     background-color: rgb(122, 233, 228);
@@ -76,17 +108,15 @@
 }
 
 .board-grid {
-    /*resize: both;*/
-    /* overflow: auto; */
     width:fit-content;
     display: grid;
-    grid-template: repeat(3, 150px)/repeat(3, 150px);
+    grid-template: repeat(3, 130px)/repeat(3, 130px);
     background-color: rgb(220, 255, 254);
     gap: 15px;
-    padding:50px;
-    border: 5px solid rgb(106, 212, 214);
+    padding:20px;
+    border: 3px solid rgb(106, 212, 214);
     border-radius: 25px;
-    margin: 50px auto;
+    margin: 30px auto;
 }
 
 .X:disabled {
@@ -117,18 +147,62 @@ button {
     
 }
 
+.flexRow {
+    display:flex;
+    gap:50px;
+    justify-content: center;
+    margin-bottom: 50px;
+
+}
+
+.playerBox {
+    background-color: rgb(220, 255, 254);
+    border: 2px solid rgb(106, 212, 214);
+    border-radius: 5px;
+    width: 180px;
+    height:120px;
+
+}
+
 #container {
     display:none;
     position: absolute;
     width: 100vw;
     height:100vh;
     background-color:rgba(197, 255, 255, 0.5);
-    z-index:1; 
-    position: absolute;
+    z-index:1;
     top:0px;
 }
 
 #popupMsg {
     font-size:30px;
     margin:auto;
+}
+
+.tokens {
+    font-size: 40px;
+    text-align: center;
+    padding-top:15px;
+}
+
+#pOneName {
+    color: rgb(222, 152, 2);
+    text-align: center;
+    font-size: 20px;
+    padding-top:20px;
+}
+
+#p1Token {
+    color:rgb(222, 152, 2);
+}
+
+#pTwoName {
+    color: rgb(88, 94, 206);
+    font-size: 20px;
+    text-align: center;
+    padding-top:20px;
+}
+
+#p2Token {
+    color: rgb(88, 94, 206);
 }
