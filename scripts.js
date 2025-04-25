@@ -1,11 +1,13 @@
-//HOW TO REPEAT FUNCTION WHEN THE CHOSEN CELL IS OCCUPIED?
+//Disable all buttons when winner found!
+//Write logic for game ties
+//Make players able to add names
+//Add play again button
+//Announce each person's turn
+
 
 /*
 GameBoard
 - create and update the game board UI
-- you can drop tokens (first check if the selected cell is empty or not)
-- you can get board
-- you can print board
 */
 function GameBoard () {
     const rows = 3;
@@ -17,41 +19,32 @@ function GameBoard () {
         for (let j= 0; j < columns; j++) {
             board[i].push(Cell());
         }
-    }
+    };
 
     const getBoard = ()=> board;
-    
 
     const dropToken = (row,column,player) => {
         let chosenCell = board[row-1][column-1];
         if (!chosenCell.getValue() == 0) {
         return;
-        }    
+        }
         chosenCell.addToken(player);
-        
-    };
 
-    
+    };
 
     const printBoard = () => {
         const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
-        //console.log(boardWithCellValues);
         return boardWithCellValues;
       };
 
       return {getBoard,dropToken,printBoard};
-
 };
 
 
 
 /*
 Cell
-- update if the cell is empty or occupied
-- update who is occupied in each cell
-- you can add token
-- you can get value
-
+- give cells values and update who is occupied in each cell
 */
 function Cell() {
     let value = 0;
@@ -62,26 +55,20 @@ function Cell() {
 
     const getValue = () => value;
 
-    
-
     return {addToken,getValue};
 }
 
 
 /*
 GameController (control the game's turns and decide if a player wins)
-* decide the active player
-* store the players and their token name
-- call current board
-- you can play round (play round, switch current player, update new board)
-* you can get active player
-
+- decide the active player
+- store the players and their token name
+- save playRound function
 */
 function GameController(playerOne = 'P1', playerTwo = 'P2') {
-    
 
     const board = GameBoard();
-    
+
     const players = [
         {
             name: playerOne,
@@ -94,8 +81,6 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
     ]
 
     let currentPlayer = players[0];
-    
-
 
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
@@ -114,7 +99,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         const p = document.createElement('p');
         p.setAttribute('id','popupMsg');
         p.textContent = `${playerName} wins!`;
-        popup.appendChild(p);   
+        popup.appendChild(p);
         console.log(`${playerName} wins!`);
     }
 
@@ -141,8 +126,8 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         const checkWinner = () => {
             const currentBoard = board.printBoard().flat();
             console.log(currentBoard);
-            
-            
+
+
             for (let i=0; i<8; i++){
                 let currentCom = [];
                 for (let j of winCombinations[i]) {
@@ -190,36 +175,38 @@ function ScreenControl () {
     const buttons = document.querySelectorAll(".btn-cell");
 
     const clickHandlerBoard = () => {
-        
+
         buttons.forEach((btn) => {
             btn.addEventListener("click", (event) => {
             const r = event.target.dataset.row;
             const c = event.target.dataset.column;
-            
+
 
             event.target.disabled = true;
             event.target.setAttribute("class",game.getCurrentPlayer().token)
             event.target.textContent = game.getCurrentPlayer().token;
             game.playRound(r,c);
           });
-        })       
+        })
     };
 
-    clickHandlerBoard();
+    //clickHandlerBoard();
+    return {clickHandlerBoard};
 }
 
-const screen = ScreenControl();
 
 
-/*
-clickHandlerBoard()
-The click handler, once it verifies that a valid cell was clicked, will get the column data-attribute value, pass that into our game controller's playRound method, then run updateScreen to refresh the DOM.
+function startGame () {
 
-*/
+    const playContainer = document.querySelector('#playContainer');
+    const playBtn = document.querySelector('#playBtn');
+    playBtn.addEventListener('click',() => {
+        setTimeout(()=>{
+            playContainer.style.display = 'none';
+            const screen = ScreenControl();
+            screen.clickHandlerBoard();},'500');
+        
+    });
+};
 
-/*
-
-First let's create a board on dom. Create buttons, then assign button texts linked to the value of the cells.
-Create a grid with buttons.
-
-*/
+const beginGame = startGame();

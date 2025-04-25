@@ -4,6 +4,70 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+@font-face {
+    font-family:'Norse';
+    src:
+		url('fonts/Norse-Bold.woff') format('woff'),
+		url('fonts/Norse-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    unicode-range: U+0020-00FE;
+}
+
+@font-face {
+    font-family:'Cicle';
+	src:
+		url('fonts/CicleFina.woff2') format('woff2'),
+		url('fonts/CicleFina.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-00FE;
+}
+
+#title{
+    font-family: 'Cicle';
+    font-size: 100px;
+    margin-bottom:80px;
+    align-self: center;
+    color: rgb(220, 255, 254);
+}
+
+#playBtn {
+    font-family: 'Norse';
+    font-size: 45px;
+    width:280px;
+    height:85px;
+    border-radius: 15px;
+    margin: auto;
+    color:white;
+    background-color: rgb(222, 152, 2);
+    border:1px solid rgb(122, 233, 228);
+    filter: drop-shadow(5px 3px 8px rgba(0,0,20,0.18));
+    transition:0s 0.2s;
+}
+
+#playBtn:active {
+    box-shadow:         inset 1px 2px 6px #584100;
+    transition: 0s ;
+}
+
+.flex {
+    /* margin:auto; */
+    display: flex;
+    flex-direction: column;
+    padding-top: 30vh;
+}
+
+#playContainer {
+    /* display:flex; */
+    position:absolute;
+    background-color: rgb(88, 94, 206);
+    width:100vw;
+    height:100vh;
+    top:0px;
+}
+
 .btn-cell {
     background-color: rgb(122, 233, 228);
     border: none;
