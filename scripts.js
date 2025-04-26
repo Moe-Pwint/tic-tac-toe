@@ -1,4 +1,4 @@
-//Stop printNewRound function when the game ends
+
 //Write logic for game ties
 //Make players able to add names
 //Add play again button
@@ -117,7 +117,6 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         [2,4,6]
     ]
 
-    
 
     printNewRound();
     const playRound = (r,c) => {
@@ -148,8 +147,10 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
         }
 
         checkWinner();
-        switchPlayer();
-        printNewRound();
+        if (winnerFound == false) {
+            switchPlayer();
+            printNewRound();
+        }
     };
 
     return {
@@ -158,22 +159,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
       };
 }
 
-//const game = GameController();
 
-
-/*
-
-updateScreen()
-
-Clear the DOM of the current board display by simply setting the .board div's text content to an empty string.
-Get the most up-to-date board from the game controller.
-Get the most up-to-date active player from the game controller.
-Render the player's turn in the .turn div.
-Render each grid square on the DOM
-I make sure to give each cell a data-attribute of column and set that value to the index of the cell in its row, so that when we click them in the future, we already have access to what column that cell is in.
-The cells are buttons, not divs. Why? In most cases, anything clickable should be a button or link. This enables those with accessability issues to still be able to use our site easily be tabbing and selecting with the keyboard.
-The purpose of this method is to refresh our screen whenever a change happens in our game. It will be called whenever the user interacts with the game, like to play a round.
-*/
 
 function ScreenControl () {
 
