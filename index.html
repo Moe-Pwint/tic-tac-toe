@@ -16,20 +16,51 @@
         </div>
     </div>
 
-    <div class="board-grid">
-        <button data-column = "1" data-row = "1" class="btn-cell" type="submit"></button>
-        <button data-column = "2" data-row = "1" class="btn-cell" type="submit"></button>
-        <button data-column = "3" data-row = "1" class="btn-cell" type="submit"></button>
-        <button data-column = "1" data-row = "2" class="btn-cell" type="submit"></button>
-        <button data-column = "2" data-row = "2" class="btn-cell" type="submit"></button>
-        <button data-column = "3" data-row = "2" class="btn-cell" type="submit"></button>
-        <button data-column = "1" data-row = "3" class="btn-cell" type="submit"></button>
-        <button data-column = "2" data-row = "3" class="btn-cell" type="submit"></button>
-        <button data-column = "3" data-row = "3" class="btn-cell" type="submit"></button>
+    <div id="setNameContainer">
+        <div class="setNameBox" id="p1">
+            <label for="player1Name">Type Player One's Name: </label>
+            <input type="text" id="player1Name" name="player1Name">
+            <p class="tokens displayToken">O</p>
+
+        </div>
+        <div class="setNameBox" id="p2">
+            <label for="player2Name">Type Player Two's Name: </label>
+            <input type="text" id="player2Name"> 
+            <p class="tokens displayToken">X</p>
+        </div>
+        <button type="submit" id="startRound">Begin Round</button>
+        
     </div>
-    
-    <div id="container">
-        <div id="popup"></div>
+
+    <div id="gameContainer">
+        <div id="game-title">Tic-Tac-Toe</div>
+        <div id="playerTurn"><p id="currentTurn"></p></div>
+        
+        <div class="board-grid">
+            <button data-column = "1" data-row = "1" class="btn-cell" type="submit"></button>
+            <button data-column = "2" data-row = "1" class="btn-cell" type="submit"></button>
+            <button data-column = "3" data-row = "1" class="btn-cell" type="submit"></button>
+            <button data-column = "1" data-row = "2" class="btn-cell" type="submit"></button>
+            <button data-column = "2" data-row = "2" class="btn-cell" type="submit"></button>
+            <button data-column = "3" data-row = "2" class="btn-cell" type="submit"></button>
+            <button data-column = "1" data-row = "3" class="btn-cell" type="submit"></button>
+            <button data-column = "2" data-row = "3" class="btn-cell" type="submit"></button>
+            <button data-column = "3" data-row = "3" class="btn-cell" type="submit"></button>
+        </div>
+        <div class="flexRow">
+            <div class="playerBox" id="playerOneBox">
+                <div id="pOneName">Name1</div>
+                <p class="tokens" id="p1Token">O</p>
+            </div>
+            <div class="playerBox" id="playerTwoBox">
+                <div id="pTwoName">Name2</div>
+                <p class="tokens" id="p2Token">X</p>
+            </div>
+        </div>
+        
+        <div id="container">
+            <div id="popup"></div>
+        </div>
     </div>
 
 </body>

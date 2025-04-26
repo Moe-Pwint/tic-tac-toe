@@ -2,6 +2,7 @@
 //Write logic for game ties
 //Make players able to add names
 //Add play again button
+//Add restart button
 
 
 /*
@@ -38,7 +39,6 @@ function GameBoard () {
 
       return {getBoard,dropToken,printBoard};
 };
-
 
 
 /*
@@ -160,7 +160,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
 }
 
 
-
+//ScreenControl listens to the buttons and update the screen UI.
 function ScreenControl () {
 
     const game = GameController();
@@ -181,8 +181,6 @@ function ScreenControl () {
           });
         })
     };
-
-    //clickHandlerBoard();
     return {clickHandlerBoard};
 }
 
@@ -193,12 +191,23 @@ function startGame () {
     const playContainer = document.querySelector('#playContainer');
     const playBtn = document.querySelector('#playBtn');
     playBtn.addEventListener('click',() => {
-        setTimeout(()=>{
             playContainer.style.display = 'none';
-            const screen = ScreenControl();
+            beginRound();
+})};
+
+
+function beginRound () {
+
+    const screen = ScreenControl();
+    const setNameContainer = document.querySelector('#setNameContainer');
+    const startRound = document.querySelector('#startRound');
+    startRound.addEventListener('click',() => {
+    setTimeout(()=>{
+            setNameContainer.style.display = 'none';
             screen.clickHandlerBoard();},'500');
-        
-    });
-};
+            const gameContainer = document.querySelector('#gameContainer');
+            gameContainer.style.display = 'contents';
+})
+}
 
 const beginGame = startGame();

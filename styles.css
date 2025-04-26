@@ -25,12 +25,21 @@
     unicode-range: U+0020-00FE;
 }
 
+:root {
+    --dark-yellow: rgb(245, 169, 6);
+    --purple: rgb(88, 94, 206);
+    --very-light-blue: rgb(220, 255, 254);
+    --dark-blue:rgb(0, 105, 128);
+    --light-blue: rgb(122, 233, 228);
+    --blue: rgb(106, 212, 214);
+}
+
 #title{
     font-family: 'KG';
     font-size: 80px;
     margin-bottom:80px;
     align-self: center;
-    color: rgb(220, 255, 254);
+    color: var(--very-light-blue);
     width:max-content;
     padding-top: 30vh;
 }
@@ -44,8 +53,8 @@
     border-radius: 15px;
     margin: auto;
     color:white;
-    background-color: rgb(222, 152, 2);
-    border:1px solid rgb(122, 233, 228);
+    background-color: var(--dark-yellow);
+    border:1px solid var(--light-blue);
     filter: drop-shadow(5px 3px 8px rgba(0,0,20,0.18));
     transition:0s 0.2s;
 }
@@ -62,23 +71,94 @@
 }
 
 #playContainer {
-    /* display:none;  */
     position:absolute;
-    background-color: rgb(88, 94, 206);
+    background-color: var(--purple);
     width:100vw;
     height:100vh;
+    z-index: 1;
     top:0px;
 }
 
 /*-----------------------------------------*/
 
+#setNameContainer {
+    position:absolute;
+    width:100vw;
+    height:100vh;
+    background-color: var(--very-light-blue);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.setNameBox {
+    
+    width:250px;
+    height:120px;
+    border: 1px solid black;
+    display:flex;
+    flex-direction: column;
+    padding:20px;
+    margin: 40px;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.setNameBox#p1 {
+    background-color: var(--dark-yellow);
+}
+
+.setNameBox#p2 {
+    background-color: var(--purple);
+}
+
+label[for=player1Name] {
+    padding-bottom: 12px;
+    
+}
+label[for=player2Name] {
+    padding-bottom: 12px;
+    color:white;
+}
+
+.tokens.displayToken {
+    color:white;
+}
+
+input#player1Name, input#player2Name {
+    padding:7px;
+    border-radius: 3px;
+    border: none;
+}
+
+#startRound {
+    font-family: 'KG';
+    font-size: 25px;
+    width:250px;
+    height:75px;
+    border-radius: 50px;
+    margin-top: 50px;
+    color: var(--purple);
+    background-color: var(--light-blue);
+    border:1px solid var(--dark-blue);
+    filter: drop-shadow(5px 3px 8px rgba(0,0,20,0.18));
+    transition:0s 0.2s;
+}
+
+#startRound:active {
+    box-shadow: inset 1px 2px 6px var(--dark-blue);
+    transition: 0s ;
+}
+
+/*-----------------------------------------*/
 
 #game-title{
     font-family: 'KG';
     font-size: 30px;
     margin:30px auto 50px auto;
     align-content: center;
-    color: rgb(0, 105, 128);
+    color: var(--dark-blue);
     width:max-content;
     
 }
@@ -91,42 +171,47 @@
     margin:auto;
     font-size: 35px;
     
-    border:0.5px ridge rgb(106, 212, 214);
+    border:0.5px ridge var(--blue);
 }
 #playerTurn >p {
     margin:auto;
-    color:rgb(0, 105, 128);
+    color:var(--dark-blue);
     
 }
 
 
 .btn-cell {
-    background-color: rgb(122, 233, 228);
+    background-color: var(--light-blue);
     border: none;
     border-radius: 15px;
     
 }
 
+#gameContainer {
+    display:none;
+}
+
 .board-grid {
+    
     width:fit-content;
     display: grid;
     grid-template: repeat(3, 130px)/repeat(3, 130px);
-    background-color: rgb(220, 255, 254);
+    background-color: var(--very-light-blue);
     gap: 15px;
     padding:20px;
-    border: 3px solid rgb(106, 212, 214);
+    border: 3px solid var(--blue);
     border-radius: 25px;
     margin: 30px auto;
 }
 
 .X:disabled {
-    background-color: rgb(88, 94, 206);
+    background-color: var(--purple);
     border: none;
     border-radius: 15px;
 }
 
 .O {
-    background-color: rgb(222, 152, 2);
+    background-color: var(--dark-yellow);
     border: none;
     border-radius: 15px;
 }
@@ -156,8 +241,8 @@ button {
 }
 
 .playerBox {
-    background-color: rgb(220, 255, 254);
-    border: 2px solid rgb(106, 212, 214);
+    background-color: var(--very-light-blue);
+    border: 2px solid var(--blue);
     border-radius: 5px;
     width: 180px;
     height:120px;
@@ -186,23 +271,23 @@ button {
 }
 
 #pOneName {
-    color: rgb(222, 152, 2);
+    color: var(--dark-yellow);
     text-align: center;
     font-size: 20px;
     padding-top:20px;
 }
 
 #p1Token {
-    color:rgb(222, 152, 2);
+    color:var(--dark-yellow);
 }
 
 #pTwoName {
-    color: rgb(88, 94, 206);
+    color: var(--purple);
     font-size: 20px;
     text-align: center;
     padding-top:20px;
 }
 
 #p2Token {
-    color: rgb(88, 94, 206);
+    color: var(--purple);
 }
