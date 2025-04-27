@@ -191,8 +191,9 @@ function startGame () {
     const playContainer = document.querySelector('#playContainer');
     const playBtn = document.querySelector('#playBtn');
     playBtn.addEventListener('click',() => {
-            playContainer.style.display = 'none';
-            beginRound();
+            setTimeout(()=> {playContainer.style.display = 'none';
+                beginRound();},'500');
+            
 })};
 
 
@@ -200,14 +201,16 @@ function beginRound () {
 
     const screen = ScreenControl();
     const setNameContainer = document.querySelector('#setNameContainer');
+    const player1Name = document.querySelector('#player1Name');
+    const player2Name = document.querySelector('#player2Name');
     const startRound = document.querySelector('#startRound');
     startRound.addEventListener('click',() => {
-    setTimeout(()=>{
+        if (!player1Name.value == '' && !player2Name.value == '') {
             setNameContainer.style.display = 'none';
-            screen.clickHandlerBoard();},'500');
+            screen.clickHandlerBoard();
             const gameContainer = document.querySelector('#gameContainer');
             gameContainer.style.display = 'contents';
-})
-}
+        }
+})};
 
 const beginGame = startGame();
