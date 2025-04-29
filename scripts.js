@@ -1,6 +1,3 @@
-
-//Write logic for game ties
-//Make players able to add names
 //Add play again button
 //Add restart button
 
@@ -103,9 +100,14 @@ function GameController(playerOne, playerTwo) {
         popup.parentElement.style.display = "flex";
         const p = document.createElement('p');
         p.setAttribute('id','popupMsg');
-        p.textContent = `${playerName} wins!`;
-        popup.appendChild(p);
-        console.log(`${playerName} wins!`);
+        if (playerName == '') {
+            p.textContent = `It's a tie!`;
+            popup.appendChild(p);
+        } else {
+            p.textContent = `${playerName} wins!`;
+            popup.appendChild(p);
+        }
+        
     }
 
     const winCombinations = [
@@ -127,11 +129,17 @@ function GameController(playerOne, playerTwo) {
         const currentT = getCurrentPlayer().token;
         // console.log(`Dropping ${currentP}'s token into row${r} column${c}.`);
         board.dropToken(r, c, getCurrentPlayer().token);
-        let winnerFound = false;
+        let gameEnd = false;
 
         const checkWinner = () => {
             const currentBoard = board.printBoard().flat();
             console.log(currentBoard);
+
+            if (currentBoard.every((cell) => !cell == '')) {
+                displayWinner('');
+                gameEnd = true;
+                return;
+            }
 
 
             for (let i=0; i<8; i++){
@@ -141,15 +149,15 @@ function GameController(playerOne, playerTwo) {
                 }
                 if (currentCom.every((e)=> e == currentT)) {
                     displayWinner(currentP);
-                    winnerFound = true;
+                    gameEnd = true;
                     return;
 
-                } winnerFound = false;
+                } gameEnd = false;
             }
         }
 
         checkWinner();
-        if (winnerFound == false) {
+        if (gameEnd == false) {
             switchPlayer();
             printNewRound();
         }
