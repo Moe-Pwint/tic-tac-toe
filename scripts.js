@@ -64,10 +64,12 @@ GameController (control the game's turns and decide if a player wins)
 - store the players and their token name
 - save playRound function
 */
-function GameController(playerOne = 'P1', playerTwo = 'P2') {
+function GameController(playerOne, playerTwo) {
 
     const board = GameBoard();
-
+    const assign = assignNames();
+    playerOne = assign.p1Name();
+    playerTwo = assign.p2Name();
     const players = [
         {
             name: playerOne,
@@ -163,7 +165,7 @@ function GameController(playerOne = 'P1', playerTwo = 'P2') {
 //ScreenControl listens to the buttons and update the screen UI.
 function ScreenControl () {
 
-    const game = GameController();
+    const game = GameController('a','b');
     const buttons = document.querySelectorAll(".btn-cell");
 
     const clickHandlerBoard = () => {
@@ -194,23 +196,30 @@ function startGame () {
             setTimeout(()=> {playContainer.style.display = 'none';
                 beginRound();},'500');
             
+})
+    const beginRound = () => {
+
+        
+        const setNameContainer = document.querySelector('#setNameContainer');
+        const player1Name = document.querySelector('#player1Name');
+        const player2Name = document.querySelector('#player2Name');
+        const startRound = document.querySelector('#startRound');
+        startRound.addEventListener('click',() => {
+            if (!player1Name.value == '' && !player2Name.value == '') {
+                setNameContainer.style.display = 'none';
+                const screen = ScreenControl();
+                screen.clickHandlerBoard();
+                const gameContainer = document.querySelector('#gameContainer');
+                gameContainer.style.display = 'contents';
+            }
 })};
+};
 
+function assignNames () {
+    const p1Name = () => document.querySelector('#player1Name').value;
+    const p2Name = () => document.querySelector('#player2Name').value;
 
-function beginRound () {
+    return {p1Name,p2Name}
 
-    const screen = ScreenControl();
-    const setNameContainer = document.querySelector('#setNameContainer');
-    const player1Name = document.querySelector('#player1Name');
-    const player2Name = document.querySelector('#player2Name');
-    const startRound = document.querySelector('#startRound');
-    startRound.addEventListener('click',() => {
-        if (!player1Name.value == '' && !player2Name.value == '') {
-            setNameContainer.style.display = 'none';
-            screen.clickHandlerBoard();
-            const gameContainer = document.querySelector('#gameContainer');
-            gameContainer.style.display = 'contents';
-        }
-})};
-
+}
 const beginGame = startGame();
