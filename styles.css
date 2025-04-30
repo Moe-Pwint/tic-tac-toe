@@ -241,12 +241,22 @@ button {
 }
 
 .playerBox {
-    background-color: var(--very-light-blue);
-    border: 2px solid var(--blue);
+    
+   
     border-radius: 5px;
     width: 180px;
     height:120px;
+}
 
+#playerOneBox {
+    border: 8px solid rgb(255, 199, 77);
+    background-color: var(--dark-yellow);
+}
+
+
+#playerTwoBox {
+    border: 8px solid rgb(147, 152, 246);
+    background-color: var(--purple);
 }
 
 #container {
@@ -268,26 +278,13 @@ button {
     font-size: 40px;
     text-align: center;
     padding-top:15px;
+    color:white;
 }
 
-#pOneName {
-    color: var(--dark-yellow);
+#pOneName,#pTwoName {
+    color: white;
     text-align: center;
     font-size: 20px;
     padding-top:20px;
 }
 
-#p1Token {
-    color:var(--dark-yellow);
-}
-
-#pTwoName {
-    color: var(--purple);
-    font-size: 20px;
-    text-align: center;
-    padding-top:20px;
-}
-
-#p2Token {
-    color: var(--purple);
-}

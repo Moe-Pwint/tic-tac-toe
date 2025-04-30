@@ -13,6 +13,7 @@ function GameBoard () {
 
     for (let i= 0; i < rows; i++) {
         board[i] = [];
+
         for (let j= 0; j < columns; j++) {
             board[i].push(Cell());
         }
@@ -44,6 +45,7 @@ Cell
 */
 function Cell() {
     let value = 0;
+
 
     const addToken = (player) => {
         value = player;
@@ -173,7 +175,7 @@ function GameController(playerOne, playerTwo) {
 //ScreenControl listens to the buttons and update the screen UI.
 function ScreenControl () {
 
-    const game = GameController('a','b');
+    const game = GameController();
     const buttons = document.querySelectorAll(".btn-cell");
 
     const clickHandlerBoard = () => {
@@ -215,19 +217,58 @@ function startGame () {
         startRound.addEventListener('click',() => {
             if (!player1Name.value == '' && !player2Name.value == '') {
                 setNameContainer.style.display = 'none';
+                localStorage.setItem("player1", player1Name.value);
+                localStorage.setItem("player2", player2Name.value);
                 const screen = ScreenControl();
                 screen.clickHandlerBoard();
                 const gameContainer = document.querySelector('#gameContainer');
                 gameContainer.style.display = 'contents';
             }
+
+        
 })};
+
+    function restart () {
+        const restartBtn = document.querySelector('#restartBtn');
+        restartBtn.addEventListener('click',() => {
+            console.log('restart');
+
+            window.location.reload();
+            
+            const player1Name = document.querySelector('#player1Name');
+            const player2Name = document.querySelector('#player2Name');
+            player1Name.value = localStorage.getItem("player1");
+            player2Name.value = localStorage.getItem("player2");
+            const screen = ScreenControl();
+            screen.clickHandlerBoard();
+            const gameContainer = document.querySelector('#gameContainer');
+            gameContainer.style.display = 'contents';
+
+        })
+} 
+restart();
 };
 
 function assignNames () {
     const p1Name = () => document.querySelector('#player1Name').value;
     const p2Name = () => document.querySelector('#player2Name').value;
 
+    const pOneName = document.querySelector('#pOneName');
+    const pTwoName = document.querySelector('#pTwoName');
+    const p = document.createElement('p');
+    const p2 = document.createElement('p');
+    p.textContent = p1Name();
+    p2.textContent = p2Name();
+    pOneName.appendChild(p);
+    pTwoName.appendChild(p2);
+
+
     return {p1Name,p2Name}
 
 }
+
+
+
+
 const beginGame = startGame();
+
