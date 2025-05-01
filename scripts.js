@@ -1,6 +1,6 @@
 //Add play again button
 //Add restart button
-
+let restart = false;
 
 /*
 GameBoard
@@ -84,6 +84,11 @@ function GameController(playerOne, playerTwo) {
 
     const switchPlayer = () => {
         currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+//;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        if (restart == true) {
+            currentPlayer = players[0];
+        }
+
     };
 
     const getCurrentPlayer = () => currentPlayer;
@@ -130,7 +135,7 @@ function GameController(playerOne, playerTwo) {
         const currentP = getCurrentPlayer().name;
         const currentT = getCurrentPlayer().token;
         // console.log(`Dropping ${currentP}'s token into row${r} column${c}.`);
-        board.dropToken(r, c, getCurrentPlayer().token);
+        board.dropToken(r, c, currentT);
         let gameEnd = false;
 
         const checkWinner = () => {
@@ -167,7 +172,10 @@ function GameController(playerOne, playerTwo) {
 
     return {
         playRound,
-        getCurrentPlayer
+        getCurrentPlayer,
+        //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        switchPlayer,
+        printNewRound
       };
 }
 
@@ -212,59 +220,56 @@ function startGame () {
         
         const setNameContainer = document.querySelector('#setNameContainer');
         const player1Name = document.querySelector('#player1Name');
+        player1Name.focus();
         const player2Name = document.querySelector('#player2Name');
         const startRound = document.querySelector('#startRound');
         startRound.addEventListener('click',() => {
             if (!player1Name.value == '' && !player2Name.value == '') {
                 setNameContainer.style.display = 'none';
-                localStorage.setItem("player1", player1Name.value);
-                localStorage.setItem("player2", player2Name.value);
-                const screen = ScreenControl();
-                screen.clickHandlerBoard();
-                const gameContainer = document.querySelector('#gameContainer');
-                gameContainer.style.display = 'contents';
+                
+        //assigning names to game boxes UI at bottom.
+        const pOneName = document.querySelector('#pOneName');
+        const pTwoName = document.querySelector('#pTwoName');
+        const p = document.createElement('p');
+        const p2 = document.createElement('p');
+        p.textContent = player1Name.value;
+        p2.textContent = player2Name.value;
+        pOneName.appendChild(p);
+        pTwoName.appendChild(p2);
+        
+        const gameContainer = document.querySelector('#gameContainer');
+        gameContainer.style.display = 'contents';
+        const screen = ScreenControl();
+        screen.clickHandlerBoard();
+
+                
+//;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                restartGame();
             }
 
         
 })};
 
-    function restart () {
-        const restartBtn = document.querySelector('#restartBtn');
-        restartBtn.addEventListener('click',() => {
-            console.log('restart');
-
-            window.location.reload();
-            
-            const player1Name = document.querySelector('#player1Name');
-            const player2Name = document.querySelector('#player2Name');
-            player1Name.value = localStorage.getItem("player1");
-            player2Name.value = localStorage.getItem("player2");
-            const screen = ScreenControl();
-            screen.clickHandlerBoard();
-            const gameContainer = document.querySelector('#gameContainer');
-            gameContainer.style.display = 'contents';
-
-        })
-} 
-restart();
 };
 
 function assignNames () {
     const p1Name = () => document.querySelector('#player1Name').value;
     const p2Name = () => document.querySelector('#player2Name').value;
 
-    const pOneName = document.querySelector('#pOneName');
-    const pTwoName = document.querySelector('#pTwoName');
-    const p = document.createElement('p');
-    const p2 = document.createElement('p');
-    p.textContent = p1Name();
-    p2.textContent = p2Name();
-    pOneName.appendChild(p);
-    pTwoName.appendChild(p2);
-
-
     return {p1Name,p2Name}
 
+}
+
+
+//;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+function restartGame () {
+    const restartBtn = document.querySelector('#restartBtn');
+    restartBtn.addEventListener('click',() => {
+        restart = true;
+        const gamePlay = GameController();
+        gamePlay.switchPlayer();
+        gamePlay.printNewRound();
+    })
 }
 
 

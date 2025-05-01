@@ -204,15 +204,17 @@ input#player1Name, input#player2Name {
     margin: 30px auto;
 }
 
-.X:disabled {
+.X {
     background-color: var(--purple);
     border: none;
+    color:white;
     border-radius: 15px;
 }
 
 .O {
     background-color: var(--dark-yellow);
     border: none;
+    color:white;
     border-radius: 15px;
 }
 
