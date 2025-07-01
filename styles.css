@@ -46,12 +46,14 @@
 
 
 #playBtn {
+    cursor: pointer;
     font-family: 'Cicle';
     font-size: 45px;
     width:280px;
     height:85px;
     border-radius: 15px;
-    margin: auto;
+    margin-top:50px;
+    align-self: center;
     color:white;
     background-color: var(--dark-yellow);
     border:1px solid var(--light-blue);
@@ -67,11 +69,12 @@
 .flex {
     display: flex;
     flex-direction: column;
-    
 }
 
 #playContainer {
+    display:none;
     position:absolute;
+    justify-content: center;
     background-color: var(--purple);
     width:100vw;
     height:100vh;
@@ -82,11 +85,11 @@
 /*-----------------------------------------*/
 
 #setNameContainer {
+    display:none;
     position:absolute;
     width:100vw;
     height:100vh;
     background-color: var(--very-light-blue);
-    display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -133,6 +136,7 @@ input#player1Name, input#player2Name {
 }
 
 #startRound {
+    cursor: pointer;
     font-family: 'KG';
     font-size: 25px;
     width:250px;
@@ -155,9 +159,12 @@ input#player1Name, input#player2Name {
 
 #game-title{
     font-family: 'KG';
-    font-size: 30px;
-    margin:30px auto 50px auto;
+    position:absolute;
+    font-size: 50px;
+    margin-left:80px;
+    margin-top: -90px;
     align-content: center;
+    /* justify-self: center; */
     color: var(--dark-blue);
     width:max-content;
     
@@ -168,7 +175,7 @@ input#player1Name, input#player2Name {
     font-family:'Cicle';
     width: 500px;
     height:70px;
-    margin:auto;
+    margin:100px auto auto auto;
     font-size: 35px;
     
     border:0.5px ridge var(--blue);
@@ -184,11 +191,12 @@ input#player1Name, input#player2Name {
     background-color: var(--light-blue);
     border: none;
     border-radius: 15px;
-    
+    cursor:pointer;
 }
 
 #gameContainer {
     display:none;
+    margin-top: 50px;
 }
 
 .board-grid {
@@ -223,14 +231,13 @@ button {
 }
 
 #popup{
-    width: 300px;
-    height: 200px;
-    background-color: rgba(0, 105, 128, 0.9);
-    color: white;
-    position: relative;
-    margin: auto;
+    width: 100vw;
+    height: 100px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(75, 18, 18);
+    position: absolute;
+    top:90px;
     display:flex;
-    border-radius: 15px;
     
 }
 
@@ -266,13 +273,13 @@ button {
     position: absolute;
     width: 100vw;
     height:100vh;
-    background-color:rgba(197, 255, 255, 0.5);
+    background-color:rgba(197, 255, 255, 0.1);
     z-index:1;
     top:0px;
 }
 
 #popupMsg {
-    font-size:30px;
+    font-size:50px;
     margin:auto;
 }
 
@@ -290,3 +297,33 @@ button {
     padding-top:20px;
 }
 
+#resettingBtns {
+    margin-top:120px;
+    margin-left: 100px;
+    min-width: 200px;
+    min-height: 100px;
+    position: absolute;
+    top: 80px;
+    z-index: 1000;
+}
+
+#resetBtn, #restartBtn {
+    cursor: pointer;
+    display:block;
+    margin:30px;
+    padding: 20px 30px;
+    border-radius: 15px;
+    border:1px solid white;
+    filter: drop-shadow(5px 3px 8px rgba(0,0,20,0.18));
+    transition:0s 0.2s;
+}
+
+#resetBtn {
+    background-color: var(--purple);
+    color: var(--light-blue);
+}
+
+#restartBtn {
+    background-color: var(--dark-yellow);
+    color: var(--very-light-blue);
+}
