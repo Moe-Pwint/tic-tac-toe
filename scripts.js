@@ -137,12 +137,6 @@ function GameController(playerOne, playerTwo) {
       const currentBoard = board.printBoard().flat();
       console.log(currentBoard);
 
-      if (currentBoard.every((cell) => !cell == "")) {
-        displayWinner("");
-        gameEnd = true;
-        return;
-      }
-
       for (let i = 0; i < 8; i++) {
         let currentCom = [];
         for (let j of winCombinations[i]) {
@@ -153,7 +147,12 @@ function GameController(playerOne, playerTwo) {
           gameEnd = true;
           return;
         }
-        gameEnd = false;
+        // gameEnd = false;
+        if (gameEnd == false && currentBoard.every((cell) => !cell == "")) {
+          displayWinner("");
+          gameEnd = true;
+          return;
+        }
       }
     };
 
